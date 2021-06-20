@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 /*
@@ -29,7 +30,13 @@ require __DIR__.'/auth.php';
 
 Route::get('/admin',[AdminController::class,'index']);
 Route::get('logout',[AuthenticatedSessionController::class,'destroy']);
+//roles
 Route::get('create-role',[RoleController::class,'createrole'])->name('create.role');
 Route::post('create-role',[RoleController::class,'storerole'])->name('create.role');
 Route::get('asign-role',[RoleController::class,'assignroleform'])->name('assign.role');
 Route::post('asign-role',[RoleController::class,'assignrole'])->name('assign.role');
+//Permission
+Route::get('create-permission',[PermissionController::class,'createpermission'])->name('create.permission');
+Route::post('create-permission',[PermissionController::class,'storepermission'])->name('create.permission');
+Route::get('assign-permission',[PermissionController::class,'assignpermissionform'])->name('assign.permission');
+Route::post('assign-permission',[PermissionController::class,'assignpermission'])->name('assign.permission');

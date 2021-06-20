@@ -342,6 +342,19 @@
             
           </ul>
         </li>
+
+        <li class="active treeview menu-open">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Permission</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="active"><a href="{{route('create.permission')}}"><i class="fa fa-circle-o"></i> Create Permission</a></li>
+            <li><a href="{{route('assign.permission')}}"><i class="fa fa-circle-o"></i> Assign Permission</a></li>
+          </ul>
+        </li>
       </ul>
     </section>
     <!-- /.sidebar -->
