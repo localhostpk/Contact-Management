@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 /*
@@ -28,3 +29,7 @@ require __DIR__.'/auth.php';
 
 Route::get('/admin',[AdminController::class,'index']);
 Route::get('logout',[AuthenticatedSessionController::class,'destroy']);
+Route::get('create-role',[RoleController::class,'createrole'])->name('create.role');
+Route::post('create-role',[RoleController::class,'storerole'])->name('create.role');
+Route::get('asign-role',[RoleController::class,'assignroleform'])->name('assign.role');
+Route::post('asign-role',[RoleController::class,'assignrole'])->name('assign.role');
