@@ -339,8 +339,9 @@
           <ul class="treeview-menu">
             <li class="active"><a href="{{route('create.role')}}"><i class="fa fa-circle-o"></i> Create Role</a></li>
             <li><a href="{{route('assign.role')}}"><i class="fa fa-circle-o"></i> Assign Role</a></li>
-            
+            <li><a href="{{route('all.role')}}"><i class="fa fa-circle-o"></i> All Roles</a></li>
           </ul>
+          
         </li>
 
         <li class="active treeview menu-open">
@@ -353,6 +354,7 @@
           <ul class="treeview-menu">
             <li class="active"><a href="{{route('create.permission')}}"><i class="fa fa-circle-o"></i> Create Permission</a></li>
             <li><a href="{{route('assign.permission')}}"><i class="fa fa-circle-o"></i> Assign Permission</a></li>
+            <li><a href="{{route('all.permission')}}"><i class="fa fa-circle-o"></i> All Permission</a></li>
           </ul>
         </li>
       </ul>

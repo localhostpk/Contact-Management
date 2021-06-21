@@ -30,7 +30,12 @@ class PermissionController extends Controller
     {
         $roles=Role::find($request->role_id);
         $permission=Permission::find($request->permission_id);
-       $roles->givePermissionTo($permission);
-        return back();
+       // $roles->givePermissionTo($permission);
+        //return back();
+    }
+    public function allpermission()
+    {
+        $permission=Permission::all();
+        return view('admin.permission.all_permission',compact('permission'));
     }
 }

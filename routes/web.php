@@ -35,8 +35,11 @@ Route::get('create-role',[RoleController::class,'createrole'])->name('create.rol
 Route::post('create-role',[RoleController::class,'storerole'])->name('create.role');
 Route::get('asign-role',[RoleController::class,'assignroleform'])->name('assign.role');
 Route::post('asign-role',[RoleController::class,'assignrole'])->name('assign.role');
+Route::get('all-role',[RoleController::class,'allrole'])->name('all.role');
+
 //Permission
 Route::get('create-permission',[PermissionController::class,'createpermission'])->name('create.permission');
 Route::post('create-permission',[PermissionController::class,'storepermission'])->name('create.permission');
 Route::get('assign-permission',[PermissionController::class,'assignpermissionform'])->name('assign.permission');
 Route::post('assign-permission',[PermissionController::class,'assignpermission'])->name('assign.permission');
+Route::get('all-permission',[PermissionController::class,'allpermission'])->name('all.permission');

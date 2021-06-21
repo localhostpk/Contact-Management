@@ -31,5 +31,10 @@ class RoleController extends Controller
         $user->assignRole($role);
         return back();
     }
+    public function allrole()
+    {
+        $role=Role::all();
+        return view('admin.role.all_role',compact('role'));
+    }
 
 }
