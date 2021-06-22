@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
@@ -43,3 +44,12 @@ Route::post('create-permission',[PermissionController::class,'storepermission'])
 Route::get('assign-permission',[PermissionController::class,'assignpermissionform'])->name('assign.permission');
 Route::post('assign-permission',[PermissionController::class,'assignpermission'])->name('assign.permission');
 Route::get('all-permission',[PermissionController::class,'allpermission'])->name('all.permission');
+
+//User
+Route::get('/add', function () {
+    return view('admin.user.add_user');
+});
+
+Route::get('add-user',[UserController::class,'create'])->name('add.user');
+Route::post('add-user',[UserController::class,'store'])->name('add.user');
+Route::get('all-user',[UserController::class,'index'])->name('all.user');
