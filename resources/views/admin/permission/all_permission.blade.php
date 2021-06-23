@@ -31,6 +31,7 @@
                 <tr>
                    <th> Permission ID </th>
               <th> Permission Name</th>
+              <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -39,6 +40,9 @@
         <tr> 
           <td class="table-success">{{$data->id}}</td>
           <td>{{$data->name}}</td>
+          <td><button class="btn btn-primary">Update</button>
+              <button class="btn btn-danger">Update</button>
+            </td>
         </tr>
           @endforeach
                 </tbody>
@@ -46,6 +50,7 @@
                 <tr>
                  <th> Permission ID </th>
               <th> Permission Name</th>
+              <th>Actions</th>
                 </tr>
                 </tfoot>
               </table>

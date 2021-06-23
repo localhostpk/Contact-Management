@@ -37,6 +37,7 @@
          <th> Country</th>
          <th> City</th>
         <th> Address</th>
+        <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -51,6 +52,9 @@
             <td>{{$data->contry}}</td>
             <td>{{$data->city}}</td>
             <td>{{$data->address}}</td>
+            <td><button class="btn btn-primary">Update</button>
+              <br><button class="btn btn-danger">Update</button>
+            </td>
          </tr>
         @endforeach
                     
@@ -65,6 +69,7 @@
          <th> Country</th>
          <th> City</th>
         <th> Address</th>
+        <th>Actions</th>
                 </tr>
                 </tfoot>
               </table>

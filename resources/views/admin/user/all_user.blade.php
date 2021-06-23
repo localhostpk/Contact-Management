@@ -32,6 +32,7 @@
                   <th> Id </th>
                   <th> User Name</th>
                   <th> User Email</th>
+                   <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -42,6 +43,9 @@
                   <td>{{$data->name}}
                   </td>
                   <td>{{$data->email}}</td>
+                  <td><button class="btn btn-primary">Update</button>
+              <button class="btn btn-danger">Update</button>
+            </td>
                 </tr>
                 @endforeach
                 </tbody>
@@ -50,6 +54,7 @@
                  <th> Id </th>
                   <th> User Name</th>
                   <th> User Email</th>
+                   <th>Actions</th>
                 </tr>
                 </tfoot>
               </table>

@@ -342,6 +342,8 @@
             <li class="active"><a href="{{route('create.role')}}"><i class="fa fa-circle-o"></i> Create Role</a></li>
             <li><a href="{{route('assign.role')}}"><i class="fa fa-circle-o"></i> Assign Role</a></li>
             <li><a href="{{route('all.role')}}"><i class="fa fa-circle-o"></i> All Roles</a></li>
+            <li><a href="//"><i class="fa fa-circle-o"></i> Edit Roles</a></li>
+            <li><a href="//"><i class="fa fa-circle-o"></i> Delete Roles</a></li>
           </ul>
           
         </li>
@@ -357,6 +359,8 @@
             <li class="active"><a href="{{route('create.permission')}}"><i class="fa fa-circle-o"></i> Create Permission</a></li>
             <li><a href="{{route('assign.permission')}}"><i class="fa fa-circle-o"></i> Assign Permission</a></li>
             <li><a href="{{route('all.permission')}}"><i class="fa fa-circle-o"></i> All Permission</a></li>
+            <li><a href="//"><i class="fa fa-circle-o"></i> Edit Permission</a></li>
+            <li><a href="//"><i class="fa fa-circle-o"></i> Delete Permission</a></li>
           </ul>
         </li>
 
@@ -370,6 +374,8 @@
           <ul class="treeview-menu">
             <li class="active"><a href="{{route('add.user')}}"><i class="fa fa-circle-o"></i>Add User</a></li>
             <li><a href="{{route('all.user')}}"><i class="fa fa-circle-o"></i> All Users</a></li>
+            <li><a href="//"><i class="fa fa-circle-o"></i> Edit Users</a></li>
+            <li><a href="//"><i class="fa fa-circle-o"></i> Delete Users</a></li>
           </ul>
         </li>
 
@@ -383,6 +389,8 @@
           <ul class="treeview-menu">
             <li class="active"><a href="{{route('add.contact')}}"><i class="fa fa-circle-o"></i>Add Contact</a></li>
             <li><a href="{{route('all.contact')}}"><i class="fa fa-circle-o"></i> All Contact</a></li>
+            <li><a href="//"><i class="fa fa-circle-o"></i> Edit Contact</a></li>
+            <li><a href="//"><i class="fa fa-circle-o"></i> Delete Contact</a></li>
           </ul>
         </li>
       </ul>

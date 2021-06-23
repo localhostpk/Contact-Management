@@ -46,5 +46,6 @@ class RoleController extends Controller
         $role=Role::all();
         return view('admin.role.all_role',compact('role'));
     }
+    
 
 }
