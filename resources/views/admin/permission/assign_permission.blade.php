@@ -23,7 +23,7 @@
 			        	<label>Select Permission</label>
 			        	<select class="form-control" name="permission_id">
 			        		@foreach($permission as $per)
-			        		<option value="{{'$per->id'}}">
+			        		<option value="{{$per->id}}">
 			        			{{$per->name}}
 			        		</option>
 			        		@endforeach

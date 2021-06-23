@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -27,7 +28,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.user.add_user');
+        $r=Role::all();
+        return view('admin.user.add_user',compact('r'));
     }
 
     /**
@@ -43,6 +45,7 @@ class UserController extends Controller
         $u->email=$request->email;
         $u->password=Hash::make($request->password);
         $u->save();
+        $u->roles()->attach($request->role_id);
         //return $request;
         return view('admin.user.all_user');
         
@@ -79,7 +82,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //$u->roles()->sync($request->role_id);
     }
 
     /**

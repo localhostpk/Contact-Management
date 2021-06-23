@@ -20,6 +20,16 @@
                     {{csrf_field()}}
               <div class="box-body">
                 <div class="form-group">
+                  <label for="exampleInputEmail1">Select Role</label>
+                 <select class="form-control" name="role_id">
+                  @foreach($r as $role)
+                  <option value="{{$role->id}}">
+                    {{$role->name}}
+                  </option>
+                  @endforeach
+                  </select>
+                </div>
+                <div class="form-group">
                   <label for="exampleInputEmail1">Name</label>
                   <input type="test" name="name" class="form-control" id="exampleInputEmail1" placeholder="Enter Name">
                 </div>
