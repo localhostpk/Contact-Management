@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
@@ -28,7 +29,6 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
-
 Route::get('/admin',[AdminController::class,'index']);
 Route::get('logout',[AuthenticatedSessionController::class,'destroy']);
 //roles
@@ -46,10 +46,11 @@ Route::post('assign-permission',[PermissionController::class,'assignpermission']
 Route::get('all-permission',[PermissionController::class,'allpermission'])->name('all.permission');
 
 //User
-Route::get('/add', function () {
-    return view('admin.user.add_user');
-});
-
 Route::get('add-user',[UserController::class,'create'])->name('add.user');
 Route::post('add-user',[UserController::class,'store'])->name('add.user');
 Route::get('all-user',[UserController::class,'index'])->name('all.user');
+
+//Contact
+Route::get('add-contact',[ContactController::class,'create'])->name('add.contact');
+Route::post('add-contact',[ContactController::class,'store'])->name('add.contact');
+Route::get('all-contact',[ContactController::class,'index'])->name('all.contact');

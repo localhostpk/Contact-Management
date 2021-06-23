@@ -370,6 +370,19 @@
             <li><a href="{{route('all.user')}}"><i class="fa fa-circle-o"></i> All Users</a></li>
           </ul>
         </li>
+
+        <li class="active treeview menu-open">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Contact</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="active"><a href="{{route('add.contact')}}"><i class="fa fa-circle-o"></i>Add Contact</a></li>
+            <li><a href="{{route('all.contact')}}"><i class="fa fa-circle-o"></i> All Contact</a></li>
+          </ul>
+        </li>
       </ul>
     </section>
     <!-- /.sidebar -->
