@@ -9,6 +9,16 @@ use App\Models\User;
 
 class RoleController extends Controller
 {
+       public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('role_or_permission:super admin|view role',['only'=>'allrole']);
+        $this->middleware('role_or_permission:super admin|create role',['only'=>'createrole','storerole']);
+        $this->middleware('role_or_permission:super admin|assign role',['only'=>'assignroleform','assignrole']);
+        $this->middleware('role_or_permission:super admin|update role',['only'=>'edit','update']);
+        $this->middleware('role_or_permission:super admin|delete role',['only'=>'destroy']);
+    }
+
     public function createrole()
     {
         return view('admin.role.create');

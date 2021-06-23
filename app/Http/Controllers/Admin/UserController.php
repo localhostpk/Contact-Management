@@ -10,6 +10,14 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+   public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('role_or_permission:super admin|view user',['only'=>'index']);
+        $this->middleware('role_or_permission:super admin|add user',['only'=>'create','store']);
+        $this->middleware('role_or_permission:super admin|update user',['only'=>'edit','update']);
+        $this->middleware('role_or_permission:super admin|delete user',['only'=>'destroy']);
+    }
     /**
      * Display a listing of the resource.
      *

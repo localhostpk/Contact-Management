@@ -9,6 +9,16 @@ use Spatie\Permission\Models\Role;
 
 class PermissionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('role_or_permission:super admin|view permission',['only'=>'allpermission']);
+        $this->middleware('role_or_permission:super admin|create permission',['only'=>'createpermission','storepermission']);
+        $this->middleware('role_or_permission:super admin|assign permission',['only'=>'assignpermissionform','assignpermission']);
+        $this->middleware('role_or_permission:super admin|update permission',['only'=>'edit','update']);
+        $this->middleware('role_or_permission:super admin|delete permission',['only'=>'destroy']);
+    }
+
     public function createpermission()
     {
         return view('admin.permission.create_permission');

@@ -21,7 +21,7 @@
 		    	<div class="col-md-4">
 			        <div class="input-group">
 			        	<label>Select Permission</label>
-			        	<select class="form-control" name="permission_id">
+			        	<select class="form-control" name="permission_id[]" multiple="multiple">
 			        		@foreach($permission as $per)
 			        		<option value="{{$per->id}}">
 			        			{{$per->name}}
