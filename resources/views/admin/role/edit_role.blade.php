@@ -8,11 +8,11 @@
     <!-- Content Header (Page header) -->
    <section class="content-header">
       <h1>
-       All Permission
+        Edit Role
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{'/dashboard'}}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">All Permission</li>
+        <li class="active">Edit Role</li>
       </ol>
     </section>
 
@@ -22,38 +22,29 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">All Permission</h3>
+              <h3 class="box-title">Edit Role</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="example1" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                   <th> Permission ID </th>
-              <th> Permission Name</th>
-              <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
+           <div class="box box-primary">
             
-            @foreach($permissions as $permission)
-        <tr> 
-          <td class="table-success">{{$permission->id}}</td>
-          <td>{{$permission->name}}</td>
-          <td><a class="btn btn-primary" href="{{route('edit.permission',$permission->id)}}">Edit</a>
-              <a class="btn btn-danger" href="{{route('delete.permission',$permission->id)}}">Delete</a>
-            </td>
-        </tr>
-          @endforeach
-                </tbody>
-                <tfoot>
-                <tr>
-                 <th> Permission ID </th>
-              <th> Permission Name</th>
-              <th>Actions</th>
-                </tr>
-                </tfoot>
-              </table>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form role="form"action="{{route('edit.role',$role->id)}}" method="post">
+            	@csrf
+              <div class="box-body">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Role Name</label>
+                  <input type="text" class="form-control"name="name" value="{{$role->name}}" id="exampleInputEmail1" placeholder="Enter Role Name">
+                </div>
+              </div>
+              <!-- /.box-body -->
+
+              <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </form>
+          </div>
             </div>
             <!-- /.box-body -->
           </div>

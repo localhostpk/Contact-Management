@@ -36,12 +36,12 @@
                 </thead>
                 <tbody>
             
-            @foreach($role as $data)
+            @foreach($roles as $role)
         <tr> 
-          <td class="table-success">{{$data->id}}</td>
-          <td>{{$data->name}}</td>
-          <td><button class="btn btn-primary">Update</button>
-              <button class="btn btn-danger">Update</button>
+          <td class="table-success">{{$role->id}}</td>
+          <td>{{$role->name}}</td>
+          <td><a class="btn btn-primary" href="{{route('edit.role',$role->id)}}">Edit</a>
+              <a class="btn btn-danger" href="{{route('delete.role',$role->id)}}">Delete</a>
             </td>
 
         </tr>

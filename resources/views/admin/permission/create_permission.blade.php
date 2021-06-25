@@ -35,7 +35,7 @@
               <div class="box-body">
                 <div class="form-group">
                   <label for="exampleInputEmail1">Permission Name</label>
-                  <input type="text" class="form-control"name="permission_name" id="exampleInputEmail1" placeholder="Enter Permission Name">
+                  <input type="text" class="form-control"name="name" id="exampleInputEmail1" placeholder="Enter Permission Name">
                 </div>
               </div>
               <!-- /.box-body -->

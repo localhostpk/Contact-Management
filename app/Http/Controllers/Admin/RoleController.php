@@ -15,8 +15,8 @@ class RoleController extends Controller
         $this->middleware('role_or_permission:super admin|view role',['only'=>'allrole']);
         $this->middleware('role_or_permission:super admin|create role',['only'=>'createrole','storerole']);
         $this->middleware('role_or_permission:super admin|assign role',['only'=>'assignroleform','assignrole']);
-        $this->middleware('role_or_permission:super admin|update role',['only'=>'edit','update']);
-        $this->middleware('role_or_permission:super admin|delete role',['only'=>'destroy']);
+        $this->middleware('role_or_permission:super admin|update role',['only'=>'editrole','updaterole']);
+        $this->middleware('role_or_permission:super admin|delete role',['only'=>'deleterole']);
     }
 
     public function createrole()
@@ -25,7 +25,7 @@ class RoleController extends Controller
     }
     public function storerole(Request $request)
     {
-        $role = Role::create(['name' => $request->role_name]);
+        $role = Role::create(['name' => $request->name]);
         return back();
     }
     public function assignroleform()
@@ -43,9 +43,28 @@ class RoleController extends Controller
     }
     public function allrole()
     {
-        $role=Role::all();
-        return view('admin.role.all_role',compact('role'));
+        $roles=Role::all();
+        return view('admin.role.all_role',compact('roles'));
     }
     
+    public function editrole($id)
+    {
+      $role=Role::find($id);
+      return view('admin.role.edit_role',compact('role'));
+    }
 
+    public function updaterole( Request $request, $id)
+    {
+        $role=Role::find($id);
+        $role->name=$request->name;
+        $role->save();
+        return redirect()->route('all.role');
+    }
+
+    public function deleterole($id)
+    {
+        $role=Role::find($id);
+        $role->delete();
+        return redirect()->route('all.role');
+    }
 }

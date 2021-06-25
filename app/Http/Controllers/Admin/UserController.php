@@ -48,14 +48,19 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $u=new User();
-        $u->name=$request->name;
-        $u->email=$request->email;
-        $u->password=Hash::make($request->password);
-        $u->save();
-        $u->roles()->attach($request->role_id);
-        //return $request;
-        return view('admin.user.all_user');
+        $request->validate([
+        'name' => 'required',
+        'email' => 'required',
+        'password' => 'required',
+         ]);
+
+        $us=new User();
+        $us->name=$request->name;
+        $us->email=$request->email;
+        $us->password=Hash::make($request->password);
+        $us->save();
+        $us->roles()->attach($request->role_id);
+        return redirect()->route('all.user');
         
     }
 
@@ -78,7 +83,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $r=Role::all();
+        $user=User::find($id);
+        return view('admin.user.edit_user',compact('user','r'));
     }
 
     /**
@@ -91,6 +98,16 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         //$u->roles()->sync($request->role_id);
+        
+        $user=User::find($id);
+         $user->name=$request->name;
+        $user->email=$request->email;
+        if($request->password){
+           $user->password=Hash::make($request->password);   
+        }
+      
+        $user->save();
+        return redirect()->route('all.user');
     }
 
     /**
@@ -101,6 +118,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user=User::find($id);
+        $user->delete();
+        return redirect()->route('all.user');
     }
 }

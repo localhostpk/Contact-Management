@@ -16,7 +16,7 @@ class ContactController extends Controller
       public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('role_or_permission:super admin|contact view',['only'=>'index','show']);
+        $this->middleware('role_or_permission:super admin|view contact',['only'=>'index','show']);
         $this->middleware('role_or_permission:super admin|contact add',['only'=>'create','store']);
         $this->middleware('role_or_permission:super admin|contact update',['only'=>'edit','update']);
         $this->middleware('role_or_permission:super admin|contact delete',['only'=>'destroy']);
@@ -57,7 +57,7 @@ class ContactController extends Controller
         $cont->address=$request->address;
 
         $cont->save();
-        return back();
+        return redirect()->route('all.contact');
     }
 
     /**

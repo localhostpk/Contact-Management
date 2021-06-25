@@ -264,7 +264,7 @@
                 <img src="{{asset('web/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
 
                 <p>
-                  Alexander Pierce - Web Developer
+                
                   <small>Member since Nov. 2012</small>
                 </p>
               </li>
@@ -313,6 +313,7 @@
         </div>
         <div class="pull-left info">
           <p>Alexander Pierce</p>
+          <small>{{Auth::user()->getRoleNames()->first()}}</small>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
@@ -330,8 +331,11 @@
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
+       
         <li class="header">MAIN NAVIGATION</li>
-        <li class="active treeview menu-open">
+
+@can('view role')
+        <li class="treeview {{request()->Is('asign-role*')  || request()->Is('create-role*') ||request()->Is('all-role*') ? 'active menu-open':''}}">
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>Roles</span>
             <span class="pull-right-container">
@@ -339,16 +343,21 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="{{route('create.role')}}"><i class="fa fa-circle-o"></i> Create Role</a></li>
-            <li><a href="{{route('assign.role')}}"><i class="fa fa-circle-o"></i> Assign Role</a></li>
-            <li><a href="{{route('all.role')}}"><i class="fa fa-circle-o"></i> All Roles</a></li>
-            <li><a href="//"><i class="fa fa-circle-o"></i> Edit Roles</a></li>
-            <li><a href="//"><i class="fa fa-circle-o"></i> Delete Roles</a></li>
+             @can('create role')
+            <li class=" {{request()->Is('create-role*') ? 'active':''}}"><a href="{{route('create.role')}}"><i class="fa fa-circle-o"></i> Create Role</a></li>
+             @endcan
+             @can('assign role')
+            <li class="{{request()->Is('asign-role*') ? 'active':''}}"><a href="{{route('assign.role')}}"><i class="fa fa-circle-o"></i> Assign Role</a></li>
+             @endcan
+             @can('view role')
+            <li class="{{request()->Is('all-role*') ? 'active':''}}"><a href="{{route('all.role')}}"><i class="fa fa-circle-o"></i> All Roles</a></li>
+             @endcan
           </ul>
           
         </li>
-
-        <li class="active treeview menu-open">
+ @endcan
+@can('view permission')
+        <li class="treeview {{request()->Is('create-permission*')  || request()->Is('assign-permission*') ||request()->Is('all-permission*') ? 'active menu-open':''}}">
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>Permission</span>
             <span class="pull-right-container">
@@ -356,15 +365,20 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="{{route('create.permission')}}"><i class="fa fa-circle-o"></i> Create Permission</a></li>
-            <li><a href="{{route('assign.permission')}}"><i class="fa fa-circle-o"></i> Assign Permission</a></li>
-            <li><a href="{{route('all.permission')}}"><i class="fa fa-circle-o"></i> All Permission</a></li>
-            <li><a href="//"><i class="fa fa-circle-o"></i> Edit Permission</a></li>
-            <li><a href="//"><i class="fa fa-circle-o"></i> Delete Permission</a></li>
+          @can('create permission')
+            <li class="{{request()->Is('create-permission*') ? 'active':''}}"><a href="{{route('create.permission')}}"><i class="fa fa-circle-o"></i> Create Permission</a></li>
+           @endcan
+            @can('assign permission')
+            <li class="{{request()->Is('assign-permission*') ? 'active':''}}"><a href="{{route('assign.permission')}}"><i class="fa fa-circle-o"></i> Assign Permission</a></li>
+            @endcan
+            @can('view permission')
+            <li class="{{request()->Is('all-permission*') ? 'active':''}}"><a href="{{route('all.permission')}}"><i class="fa fa-circle-o"></i> All Permission</a></li>
+           @endcan
           </ul>
         </li>
-
-          <li class="active treeview menu-open">
+@endcan
+@can('view user')
+          <li class="treeview {{request()->Is('add-user*')  || request()->Is('all-user*') ? 'active menu-open':''}}">
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>Users</span>
             <span class="pull-right-container">
@@ -372,14 +386,17 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="{{route('add.user')}}"><i class="fa fa-circle-o"></i>Add User</a></li>
-            <li><a href="{{route('all.user')}}"><i class="fa fa-circle-o"></i> All Users</a></li>
-            <li><a href="//"><i class="fa fa-circle-o"></i> Edit Users</a></li>
-            <li><a href="//"><i class="fa fa-circle-o"></i> Delete Users</a></li>
+           @can('add user')
+            <li class="{{request()->Is('add-user*') ? 'active':''}}"><a href="{{route('add.user')}}"><i class="fa fa-circle-o"></i>Add User</a></li>
+            @endcan
+            @can('view user')
+            <li class="{{request()->Is('all-user*') ? 'active':''}}"><a href="{{route('all.user')}}"><i class="fa fa-circle-o"></i> All Users</a></li>
+           @endcan
           </ul>
         </li>
-
-        <li class="active treeview menu-open">
+@endcan
+@can('view contact')
+        <li class="treeview {{request()->Is('add-contact*')  || request()->Is('all-contact*') ? 'active menu-open':''}}">
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>Contact</span>
             <span class="pull-right-container">
@@ -387,12 +404,16 @@
             </span>
           </a>
           <ul class="treeview-menu">
+            @can('view contact')
             <li class="active"><a href="{{route('add.contact')}}"><i class="fa fa-circle-o"></i>Add Contact</a></li>
+            @endcan
+            @can('view contact')
             <li><a href="{{route('all.contact')}}"><i class="fa fa-circle-o"></i> All Contact</a></li>
-            <li><a href="//"><i class="fa fa-circle-o"></i> Edit Contact</a></li>
-            <li><a href="//"><i class="fa fa-circle-o"></i> Delete Contact</a></li>
+            @endcan
+            
           </ul>
         </li>
+ @endcan
       </ul>
     </section>
     <!-- /.sidebar -->

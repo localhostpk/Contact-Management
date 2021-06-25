@@ -43,8 +43,8 @@
                   <td>{{$data->name}}
                   </td>
                   <td>{{$data->email}}</td>
-                  <td><button class="btn btn-primary">Update</button>
-              <button class="btn btn-danger">Update</button>
+                  <td><a class="btn btn-primary" href="{{route('edit.user',$data->id)}}">Edit</a>
+              <a class="btn btn-danger" href="{{route('destroy.user',$data->id)}}">Delete</a>
             </td>
                 </tr>
                 @endforeach
