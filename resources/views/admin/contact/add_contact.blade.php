@@ -29,7 +29,9 @@
             <!-- /.box-header -->
             <div class="box-body">
            <div class="box box-primary">
-            
+            @if($errors->any())
+          {!! implode('', $errors->all('<div class="alert alert-danger">:message</div>')) !!}
+          @endif
             <!-- /.box-header -->
             <!-- form start -->
             <form role="form"action="{{route('add.contact')}}" method="post">
@@ -39,7 +41,10 @@
                 <label>Select User</label>
                 <select class="form-control select2" style="width: 100%;"name="user_id">
                    @foreach($us as $user)
-                  <option selected="selected" value="{{$user->id}}">
+                  <option  value="{{$user->id}}" @if(old("user_id")==$user->id)
+                    selected="selected"
+                    @endif
+                    >
                     {{$user->name}}
                   </option>
                  @endforeach
@@ -47,28 +52,46 @@
               </div>
                <div class="form-group">
                   <label for="exampleInputEmail1">Name:</label>
-                  <input type="test" name="name" class="form-control" id="exampleInputEmail1" placeholder="Enter Name">
+                  <input type="test" name="name" value="{{old('name')}}"  class="form-control" id="exampleInputEmail1" placeholder="Enter Name">
                 </div>
+                @if($errors->has('name'))
+                <div class="text-danger">{{ $errors->first('name') }}</div>
+                @endif
                 <div class="form-group">
                   <label for="exampleInputEmail1">Email address:</label>
                   <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
                 </div>
+                @if($errors->has('email'))
+                <div class="text-danger">{{ $errors->first('email') }}</div>
+                @endif
                <div class="form-group">
                   <label for="exampleInputEmail1">Phone No:</label>
                   <input type="test" name="phone_no" class="form-control" id="exampleInputEmail1" placeholder="Enter Phone Number">
                 </div>
+                @if($errors->has('phone_no'))
+                <div class="text-danger">{{ $errors->first('phone_no') }}</div>
+                @endif
                 <div class="form-group">
                   <label for="exampleInputEmail1">Country:</label>
                   <input type="test" name="contry" class="form-control" id="exampleInputEmail1" placeholder="Enter Contry">
                 </div>
+                @if($errors->has('contry'))
+                <div class="text-danger">{{ $errors->first('contry') }}</div>
+                @endif
                 <div class="form-group">
                   <label for="exampleInputEmail1">City:</label>
                   <input type="test" name="city" class="form-control" id="exampleInputEmail1" placeholder="Enter City Name">
                 </div>
+                @if($errors->has('city'))
+                <div class="text-danger">{{ $errors->first('city') }}</div>
+                @endif
                 <div class="form-group">
                   <label for="exampleInputEmail1">Address:</label>
                   <input type="test" name="address" class="form-control" id="exampleInputEmail1" placeholder="Enter Address">
                 </div>
+                @if($errors->has('address'))
+                <div class="text-danger">{{ $errors->first('address') }}</div>
+                @endif
               </div>
               <!-- /.box-body -->
 

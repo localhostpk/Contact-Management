@@ -10,11 +10,11 @@
     <!-- Content Header (Page header) -->
    <section class="content-header">
       <h1>
-         Add User
+         Edit Contact
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{'/dashboard'}}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active"> Add User</li>
+        <li class="active"> Edit Contact</li>
       </ol>
     </section>
 
@@ -24,7 +24,7 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title"> Add User</h3>
+              <h3 class="box-title"> Edit Contact</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -32,47 +32,45 @@
             
             <!-- /.box-header -->
             <!-- form start -->
-          @if($errors->any())
-          {!! implode('', $errors->all('<div class="alert alert-danger">:message</div>')) !!}
-          @endif
-            <form role="form"action="{{route('add.user')}}" method="post">
+            <form role="form"action="{{route('edit.contact',$contact->id)}}" method="post">
               @csrf
               <div class="box-body">
                  <div class="form-group">
-                <label>Select Role</label>
-                <select class="form-control select2" style="width: 100%;"name="role_id">
-                      @foreach($r as $role)
-                  <option  value="{{$role->id}}" @if(old("role_id")==$role->id)
+                <label>Select User</label>
+                <select class="form-control select2" style="width: 100%;"name="user_id">
+                   @foreach($users as $user)
+                  <option value="{{$user->id}}"  @if($contact->users->first()->id==$user->id)
                     selected="selected"
-                    @endif
-                    >
-                   {{$role->name}}
+                    @endif>
+                    {{$user->name}}
                   </option>
                  @endforeach
                 </select>
               </div>
-
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Name</label>
-                  <input type="test" name="name" value="{{old('name')}}" class="form-control" id="exampleInputEmail1" placeholder="Enter Name">
+               <div class="form-group">
+                  <label for="exampleInputEmail1">Name:</label>
+                  <input type="test" name="name" value="{{$contact->name}}" class="form-control" id="exampleInputEmail1" placeholder="Enter Name">
                 </div>
-                @if($errors->has('name'))
-                <div class="text-danger">{{ $errors->first('name') }}</div>
-                @endif
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Email address</label>
-                  <input type="email" name="email" value="{{old('name')}}"  class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                  <label for="exampleInputEmail1">Email address:</label>
+                  <input type="email" name="email" value="{{$contact->email}}" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
                 </div>
-                @if($errors->has('email'))
-                <div class="text-danger">{{ $errors->first('email') }}</div>
-                @endif
+               <div class="form-group">
+                  <label for="exampleInputEmail1">Phone No:</label>
+                  <input type="test" name="phone_no" value="{{$contact->phone_no}}" class="form-control" id="exampleInputEmail1" placeholder="Enter Phone Number">
+                </div>
                 <div class="form-group">
-                  <label for="exampleInputPassword1">Password</label>
-                  <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                  <label for="exampleInputEmail1">Country:</label>
+                  <input type="test" name="contry" value="{{$contact->contry}}" class="form-control" id="exampleInputEmail1" placeholder="Enter Contry">
                 </div>
-                @if($errors->has('password'))
-                <div class="text-danger">{{ $errors->first('password') }}</div>
-                @endif
+                <div class="form-group">
+                  <label for="exampleInputEmail1">City:</label>
+                  <input type="test" name="city" value="{{$contact->city}}" class="form-control" id="exampleInputEmail1" placeholder="Enter City Name">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Address:</label>
+                  <input type="test" name="address" value="{{$contact->address}}" class="form-control" id="exampleInputEmail1" placeholder="Enter Address">
+                </div>
               </div>
               <!-- /.box-body -->
 

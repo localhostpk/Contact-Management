@@ -17,9 +17,9 @@ class ContactController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('role_or_permission:super admin|view contact',['only'=>'index','show']);
-        $this->middleware('role_or_permission:super admin|contact add',['only'=>'create','store']);
-        $this->middleware('role_or_permission:super admin|contact update',['only'=>'edit','update']);
-        $this->middleware('role_or_permission:super admin|contact delete',['only'=>'destroy']);
+        $this->middleware('role_or_permission:super admin|add contact',['only'=>'create','store']);
+        $this->middleware('role_or_permission:super admin|update contact',['only'=>'edit','update']);
+        $this->middleware('role_or_permission:super admin|delete contact',['only'=>'destroy']);
     }
 
     public function index()
@@ -47,6 +47,14 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+        'name' => 'required',
+        'email' => 'required',
+        'phone_no' => 'required',
+        'contry' => 'required',
+        'city' => 'required',
+        'address' => 'required',
+         ]);
         $cont=new Contact();
         $cont->user_id=$request->user_id;
         $cont->name=$request->name;
@@ -79,7 +87,9 @@ class ContactController extends Controller
      */
     public function edit($id)
     {
-        //
+        $users=User::all();
+        $contact=Contact::find($id);
+        return view('admin.contact.edit_contact',compact('contact','users'));
     }
 
     /**
@@ -102,6 +112,8 @@ class ContactController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $contact=Contact::find($id);
+        $contact->delete();
+        return redirect()->route('all.contact');
     }
 }

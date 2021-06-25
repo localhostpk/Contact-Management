@@ -312,7 +312,7 @@
           <img src="{{asset('web/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
+          <p>{{Auth::user()->name}}</p>
           <small>{{Auth::user()->getRoleNames()->first()}}</small>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>

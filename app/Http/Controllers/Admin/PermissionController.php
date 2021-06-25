@@ -27,6 +27,9 @@ class PermissionController extends Controller
     {
         //$per=Permission::all();
         //return $per;
+        $request->validate([
+        'name' => 'required',
+         ]);
        $permission = Permission::create(['name' => $request->name]);
        return back();
     }

@@ -27,7 +27,9 @@
             <!-- /.box-header -->
             <div class="box-body">
            <div class="box box-primary">
-            
+            @if($errors->any())
+          {!! implode('', $errors->all('<div class="alert alert-danger">:message</div>')) !!}
+          @endif
             <!-- /.box-header -->
             <!-- form start -->
             <form role="form"action="{{route('create.role')}}" method="post">
@@ -37,6 +39,9 @@
                   <label for="exampleInputEmail1">Role Name</label>
                   <input type="text" class="form-control"name="name" id="exampleInputEmail1" placeholder="Enter Role Name">
                 </div>
+                 @if($errors->has('name'))
+                <div class="text-danger">{{ $errors->first('name') }}</div>
+                @endif
               </div>
               <!-- /.box-body -->
 

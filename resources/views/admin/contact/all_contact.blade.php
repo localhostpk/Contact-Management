@@ -52,8 +52,8 @@
             <td>{{$data->contry}}</td>
             <td>{{$data->city}}</td>
             <td>{{$data->address}}</td>
-            <td><button class="btn btn-primary">Update</button>
-              <br><button class="btn btn-danger">Update</button>
+            <td><a class="btn btn-primary" href="{{route('edit.contact',$data->id)}}">Edit</a>
+              <br><a class="btn btn-danger" href="{{route('destroy.contact',$data->id)}}">Delete</a>
             </td>
          </tr>
         @endforeach

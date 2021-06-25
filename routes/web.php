@@ -25,10 +25,10 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
    
-    if(auth()->user()->can('create permission')){
-        //return 'ad';
-    }
-    // return Auth::user()->getPermissionsViaRoles();
+    // if(auth()->user()->can('create permission')){
+    //     //return 'ad';
+    // }
+    // // return Auth::user()->getPermissionsViaRoles();
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 

@@ -27,7 +27,9 @@
             <!-- /.box-header -->
             <div class="box-body">
            <div class="box box-primary">
-            
+          @if($errors->any())
+          {!! implode('', $errors->all('<div class="alert alert-danger">:message</div>')) !!}
+          @endif
             <!-- /.box-header -->
             <!-- form start -->
             <form role="form"action="{{route('create.permission')}}" method="post">
@@ -35,8 +37,11 @@
               <div class="box-body">
                 <div class="form-group">
                   <label for="exampleInputEmail1">Permission Name</label>
-                  <input type="text" class="form-control"name="name" id="exampleInputEmail1" placeholder="Enter Permission Name">
+                  <input type="text" class="form-control"name="name"  id="exampleInputEmail1" placeholder="Enter Permission Name">
                 </div>
+                @if($errors->has('name'))
+                <div class="text-danger">{{ $errors->first('name') }}</div>
+                @endif
               </div>
               <!-- /.box-body -->
 
