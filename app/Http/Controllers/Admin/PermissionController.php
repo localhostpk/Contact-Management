@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use App\Models\User;
 
 class PermissionController extends Controller
 {
@@ -35,15 +36,14 @@ class PermissionController extends Controller
     }
     public function assignpermissionform()
     {
+        //return $user=User::find(5);
         $roles=Role::all();
         $permission=Permission::all();
         return view('admin.permission.assign_permission',compact('roles','permission'));
     }
     public function assignpermission(Request $request)
     {
-
         $roles=Role::find($request->role_id);
-        $permission=Permission::find($request->permission_id);
         $roles->syncPermissions($request->permission_id);
         return back();
     }

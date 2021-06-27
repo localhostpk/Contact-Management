@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use App\Models\User;
+use DB;
 
 class RoleController extends Controller
 {
@@ -21,14 +23,16 @@ class RoleController extends Controller
 
     public function createrole()
     {
-        return view('admin.role.create');
+        $permission=Permission::all();
+        return view('admin.role.create',compact('permission'));
     }
     public function storerole(Request $request)
     {
         $request->validate([
-        'name' => 'required',
+        'name' => 'required|unique:roles',
          ]);
         $role = Role::create(['name' => $request->name]);
+        $role->permissions()->sync($request->permission_id);
         return back();
     }
     public function assignroleform()
@@ -54,6 +58,15 @@ class RoleController extends Controller
     {
       $role=Role::find($id);
       return view('admin.role.edit_role',compact('role'));
+    }
+
+    public function showRole($id)
+    {
+      $role=Role::find($id);
+      $permissions = Permission::all();
+      $roleHasPermissions = DB::table('role_has_permissions')
+                            ->select(['*'])->where('role_id',$id)->get();
+      return view('admin.role.role_to_permission',compact('role', 'permissions', 'roleHasPermissions'));
     }
 
     public function updaterole( Request $request, $id)

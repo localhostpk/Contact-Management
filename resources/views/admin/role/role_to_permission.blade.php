@@ -1,7 +1,7 @@
 @extends('admin.layouts.head_foot')
 @push('css')
  <link rel="stylesheet" href="{{asset('web/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}">
-  <!-- Select2 -->
+ <!-- Select2 -->
   <link rel="stylesheet" href="{{asset('web/bower_components/select2/dist/css/select2.min.css')}}">
  @endpush
 @section('body')
@@ -10,11 +10,11 @@
     <!-- Content Header (Page header) -->
    <section class="content-header">
       <h1>
-         Edit Contact
+         Assign Permission to Role
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{'/dashboard'}}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active"> Edit Contact</li>
+        <li class="active"> Assign Permission to Role</li>
       </ol>
     </section>
 
@@ -24,61 +24,73 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title"> Edit Contact</h3>
+              <h3 class="box-title"> Assign Permission to Role</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-           <div class="box box-primary">
+
+              <h1>{{$role->name}}</h1>
+           <div class="">
             
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form"action="{{route('edit.contact',$contact->id)}}" method="post">
-              @csrf
-              <div class="box-body">
-                 <div class="form-group">
-                <label>Select User</label>
-                <select class="form-control select2" style="width: 100%;"name="user_id">
-                   @foreach($users as $user)
-                  <option value="{{$user->id}}"  @if($contact->user_id==$user->id)
-                    selected="selected"
-                    @endif>
-                    {{$user->name}}
-                  </option>
-                 @endforeach
-                </select>
-              </div>
-               <div class="form-group">
-                  <label for="exampleInputEmail1">Name:</label>
-                  <input type="test" name="name" value="{{$contact->name}}" class="form-control" id="exampleInputEmail1" placeholder="Enter Name">
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Email address:</label>
-                  <input type="email" name="email" value="{{$contact->email}}" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-                </div>
-               <div class="form-group">
-                  <label for="exampleInputEmail1">Phone No:</label>
-                  <input type="test" name="phone_no" value="{{$contact->phone_no}}" class="form-control" id="exampleInputEmail1" placeholder="Enter Phone Number">
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Country:</label>
-                  <input type="test" name="contry" value="{{$contact->contry}}" class="form-control" id="exampleInputEmail1" placeholder="Enter Contry">
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputEmail1">City:</label>
-                  <input type="test" name="city" value="{{$contact->city}}" class="form-control" id="exampleInputEmail1" placeholder="Enter City Name">
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Address:</label>
-                  <input type="test" name="address" value="{{$contact->address}}" class="form-control" id="exampleInputEmail1" placeholder="Enter Address">
-                </div>
-              </div>
-              <!-- /.box-body -->
+          
+                   <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">All Permissions</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>Select Permission</th>
+                 <th> Permission ID </th>
+               <th> Permission Name</th>
+              
+                </tr>
+                </thead>
+                <tbody>
+            
+            @foreach($permissions as $single_permis)
 
-              <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </div>
-            </form>
+             
+              <tr> 
+                <td>
+                  <input type="checkbox" name="permission_id[]" 
+                  @foreach($roleHasPermissions as $selectedPermission)
+                    @if($single_permis->id == $selectedPermission->permission_id) checked @endif
+                  @endforeach>
+                </td>
+                <td class="table-success">{{$single_permis->id}}</td>
+                <td>{{$single_permis->name}}</td> 
+              </tr>
+              @endforeach
+           
+
+                </tbody>
+                <tfoot>
+                <tr>
+                  <th>Select Permission</th>
+                     <th> Permmission ID </th>
+              <th> Permmission Name</th>
+      
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.box-body -->
           </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+              
             </div>
             <!-- /.box-body -->
           </div>

@@ -43,6 +43,7 @@ Route::get('asign-role',[RoleController::class,'assignroleform'])->name('assign.
 Route::post('asign-role',[RoleController::class,'assignrole'])->name('assign.role');
 Route::get('all-role',[RoleController::class,'allrole'])->name('all.role');
 
+Route::get('view-role/{id}',[RoleController::class,'showRole'])->name('view.role');
 Route::get('edit-role/{id}',[RoleController::class,'editrole'])->name('edit.role');
 Route::post('edit-role/{id}',[RoleController::class,'updaterole'])->name('edit.role');
 Route::get('delete-role/{id}',[RoleController::class,'deleterole'])->name('delete.role');

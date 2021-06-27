@@ -31,6 +31,7 @@
                 <tr>
                  <th> Role ID </th>
               <th> Role Name</th>
+               <th> Permission Name</th>
                <th>Actions</th>
                 </tr>
                 </thead>
@@ -40,6 +41,18 @@
         <tr> 
           <td class="table-success">{{$role->id}}</td>
           <td>{{$role->name}}</td>
+          <td>
+
+            @if($role->permissions)
+            @foreach($role->permissions as $permission)
+
+            {{$permission->name}}
+             {{!$loop->last ? '||':''}}
+            @endforeach
+            @endif
+          </td>
+          
+          <td><a class="btn btn-primary" href="{{route('view.role',$role->id)}}">Assign Permission</a>
           <td><a class="btn btn-primary" href="{{route('edit.role',$role->id)}}">Edit</a>
               <a class="btn btn-danger" href="{{route('delete.role',$role->id)}}">Delete</a>
             </td>

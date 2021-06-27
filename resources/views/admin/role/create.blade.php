@@ -45,10 +45,61 @@
               </div>
               <!-- /.box-body -->
 
-              <div class="box-footer">
+         
+          <!--   <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">All Permissions</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- 
+            <div class="box-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th></th>
+                 <th> Permission ID </th>
+             
+               <th> Permission Name</th>
+              
+                </tr>
+                </thead>
+                <tbody>
+            
+            @foreach($permission as $single_permis)
+        <tr> 
+          <td><input type="checkbox" name="permission_id[]" value="{{$single_permis->id}}"></td>
+          <td class="table-success">{{$single_permis->id}}</td>
+          <td>{{$single_permis->name}}</td>
+          
+          
+         
+        </tr>
+          @endforeach
+                </tbody>
+                <tfoot>
+                <tr>
+                     <th> Permmission ID </th>
+              <th> Permmission Name</th>
+      
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+         
+        </div>
+      
+      </div>
+     
+    </section> -->
+         <div class="box-footer">
                 <button type="submit" class="btn btn-primary">Submit</button>
               </div>
             </form>
+    <!-- /.content -->
           </div>
             </div>
             <!-- /.box-body -->

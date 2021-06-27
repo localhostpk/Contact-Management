@@ -35,16 +35,6 @@
             <form role="form"action="{{route('assign.permission')}}" method="post">
             	@csrf
               <div class="box-body">
-                <div class="form-group">
-			        	<label>Select Permission</label>
-			        	<select class="form-control" name="permission_id[]" multiple="multiple">
-			        		@foreach($permission as $per)
-			        		<option value="{{$per->id}}">
-			        			{{$per->name}}
-			        		</option>
-			        		@endforeach
-			        	</select>
-			        </div>
 			        <div class="form-group">
                 <label>Select Role</label>
                 <select class="form-control select2" style="width: 100%;"name="role_id">
@@ -55,6 +45,55 @@
                  @endforeach
                 </select>
               </div>
+                   <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">All Permissions</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>Select Permission</th>
+                 <th> Permission ID </th>
+               <th> Permission Name</th>
+              
+                </tr>
+                </thead>
+                <tbody>
+            
+            @foreach($permission as $single_permis)
+        <tr> 
+          <td><input type="checkbox" name="permission_id[]" value="{{$single_permis->id}}"></td>
+          <td class="table-success">{{$single_permis->id}}</td>
+          <td>{{$single_permis->name}}</td>
+          
+          
+         
+        </tr>
+          @endforeach
+                </tbody>
+                <tfoot>
+                <tr>
+                  <th>Select Permission</th>
+                     <th> Permmission ID </th>
+              <th> Permmission Name</th>
+      
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
               </div>
               <!-- /.box-body -->
 
