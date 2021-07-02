@@ -1,14 +1,20 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use DB;
-use App\Models\User;
 
-
-class AdminController extends Controller
+class QRController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('role_or_permission:super admin|view qr',['only'=>'index']);
+        $this->middleware('role_or_permission:super admin|create qr',['only'=>'create','store']);
+        $this->middleware('role_or_permission:super admin|update qr',['only'=>'edit','update']);
+        $this->middleware('role_or_permission:super admin|delete qr',['only'=>'destroy']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +22,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.index');
+        //
     }
 
     /**
@@ -26,7 +32,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        //
+      //
     }
 
     /**
@@ -83,24 +89,5 @@ class AdminController extends Controller
     public function destroy($id)
     {
         //
-    }
-    public function dashboard()
-    {
-        if(auth()->user()->hasRole('super admin'))
-        {
-            $contacts=DB::table('contacts')->select('id')->count('id');
-            $users=DB::table('users')->select('id')->count('id');
-            $permissions=DB::table('permissions')->select('id')->count('id');
-            $roles=DB::table('roles')->select('id')->count('id');
-        }
-        else
-        {
-            $contacts=auth()->user()->contacts()->count();
-            $users=auth()->user()->count();
-            $permissions=auth()->user()->permissions()->count();
-            $roles=auth()->user()->roles()->count();
-        
-        }
-        return view('dashboard',compact('contacts','users','permissions','roles'));
     }
 }

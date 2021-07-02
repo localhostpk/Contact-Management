@@ -35,18 +35,30 @@
             <form role="form"action="{{route('edit.user',$user->id)}}" method="post">
               @csrf
               <div class="box-body">
-                 <div class="form-group">
-                <label>Select Role</label>
-                <select class="form-control select2" style="width: 100%;"name="role_id">
-                      @foreach($r as $role)
-                  <option  value="{{$role->id}}" @if($user->roles->first()->id==$role->id)
+                  <div class="form-group">
+               <label>Add User With Reference</label>
+                <select class="form-control select2" style="width: 100%;"name="user_id">
+                   @foreach($users as $us)
+                  <option value="{{$us->id}}"  @if($user->id==$us->id)
                     selected="selected"
                     @endif>
-                   {{$role->name}}
+                    {{$us->name}}
                   </option>
                  @endforeach
                 </select>
-              </div>
+                 </div>
+                 <div class="form-group">
+               <label>Select Role</label>
+                <select class="form-control select2" style="width: 100%;"name="role_id">
+                   @foreach($r as $role)
+                  <option value="{{$role->id}}"  @if($user->roles->first()->sid==$role->id)
+                    selected="selected"
+                    @endif>
+                    {{$role->name}}
+                  </option>
+                 @endforeach
+                </select>
+                 </div>
 
                 <div class="form-group">
                   <label for="exampleInputEmail1">Name</label>

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
+use App\Models\UserMember;
 
 class UserController extends Controller
 {
@@ -25,7 +26,14 @@ class UserController extends Controller
      */
     public function index()
     {
-        $us=User::all();
+        if(auth()->user()->hasRole('super admin')){
+            $us=User::all();
+        }
+      
+        else{
+           $us=auth()->user()->members()->with('members')->get();
+        }
+        
         return view('admin.user.all_user',compact('us'));
     }
 
@@ -36,8 +44,20 @@ class UserController extends Controller
      */
     public function create()
     {
+       if(auth()->user()->hasRole('super admin')){
+            $users=User::wherehas('roles',function($q){
+            $q->where('name','city admin');
+        })->get();
+        }
+        else{
+           $users=auth()->user()->members()->wherehas('roles',function($q){
+            $q->where('name','city admin');
+            })->get();
+        }
+        
+        
         $r=Role::all();
-        return view('admin.user.add_user',compact('r'));
+        return view('admin.user.add_user',compact('r','users'));
     }
 
     /**
@@ -53,13 +73,20 @@ class UserController extends Controller
         'email' => 'required',
         'password' => 'required',
          ]);
-
+      
         $us=new User();
         $us->name=$request->name;
         $us->email=$request->email;
         $us->password=Hash::make($request->password);
         $us->save();
         $us->roles()->attach($request->role_id);
+        if(!auth()->user()->hasRole('super admin') && empty($request->user_id)){
+        UserMember::create(['city_admin_id'=>auth()->user()->id,'user_id'=>$us->id]);
+        
+        }
+        else{
+        UserMember::create(['city_admin_id'=>$request->user_id,'user_id'=>$us->id]);
+        }
         return redirect()->route('all.user');
         
     }
@@ -83,9 +110,12 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        $users=User::wherehas('roles',function($q){
+            $q->where('name','city admin');
+        })->get();
         $r=Role::all();
         $user=User::find($id);
-        return view('admin.user.edit_user',compact('user','r'));
+        return view('admin.user.edit_user',compact('user','r','users'));
     }
 
     /**
@@ -121,5 +151,14 @@ class UserController extends Controller
         $user=User::find($id);
         $user->delete();
         return redirect()->route('all.user');
+    }
+    public function generate($id)
+    {
+        $user=User::find($id);
+        if($user->qrcode){
+            $user->qrcode->delete();
+        }
+        $user->qrcode()->create();
+        return back();
     }
 }

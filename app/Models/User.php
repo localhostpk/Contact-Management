@@ -40,4 +40,32 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+
+    public function members()
+    {
+        return $this->belongsToMany(self::class,'user_members','city_admin_id','user_id');
+    }
+
+    public function contacts()
+    {
+        return $this->hasMany(Contact::class);
+    }
+
+    public function cityAdmin()
+    {
+       return $this->hasOneThrough(self::class,
+        UserMember::class,
+        'user_id',
+        'id',
+        'id',
+        'city_admin_id',
+           );
+    }
+
+    public function qrcode()
+    {
+        return $this->hasOne(QrCode::class);
+    }
+    
 }

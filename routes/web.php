@@ -6,7 +6,11 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\UserContactController;
+use App\Http\Controllers\Admin\QRController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -23,14 +27,12 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/dashboard', function () {
+// Route::get('/dashboard', function () {
    
-    // if(auth()->user()->can('create permission')){
-    //     //return 'ad';
-    // }
-    // // return Auth::user()->getPermissionsViaRoles();
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+   
+//     return view('dashboard');
+// })->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard',[AdminController::class,'dashboard'])->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
 
@@ -66,6 +68,10 @@ Route::get('all-user',[UserController::class,'index'])->name('all.user');
 Route::get('edit-user/{id}',[UserController::class,'edit'])->name('edit.user');
 Route::post('edit-user/{id}',[UserController::class,'update'])->name('update.user');
 Route::get('delete-user/{id}',[UserController::class,'destroy'])->name('destroy.user');
+
+//QR CODE
+Route::get('generate-link-qrcode/{id}',[UserController::class,'generate'])->name('generate.qr_code.user');
+
 //Contact
 Route::get('add-contact',[ContactController::class,'create'])->name('add.contact');
 Route::post('add-contact',[ContactController::class,'store'])->name('add.contact');
@@ -74,3 +80,18 @@ Route::get('all-contact',[ContactController::class,'index'])->name('all.contact'
 Route::get('edit-contact/{id}',[ContactController::class,'edit'])->name('edit.contact');
 Route::post('edit-contact/{id}',[ContactController::class,'update'])->name('update.contact');
 Route::get('delete-contact/{id}',[ContactController::class,'destroy'])->name('destroy.contact');
+
+
+//outsite contact
+Route::get('add-usercontact/{token}',[UserContactController::class,'create'])->name('add.usercontact');
+Route::post('add-usercontact/{token}',[UserContactController::class,'store'])->name('add.usercontact');
+
+
+//QR Code Genrate
+Route::get('qrcode/{token}' ,[UserContactController::class,'viewQR'])->name('qr_code.view');
+
+//QR Codes
+
+/*Route::get('create-qr',[QRController::class,'create'])->name('create.qr');
+Route::post('create-qr',[QRController::class,'store'])->name('create.qr');
+Route::get('all-qr',[QRController::class,'index'])->name('all.qr');*/

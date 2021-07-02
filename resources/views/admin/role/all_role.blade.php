@@ -53,9 +53,9 @@
           </td>
           
           <td><a class="btn btn-primary" href="{{route('view.role',$role->id)}}">Assign Permission</a>
-          <td><a class="btn btn-primary" href="{{route('edit.role',$role->id)}}">Edit</a>
+          <!-- <td><a class="btn btn-primary" href="{{route('edit.role',$role->id)}}">Edit</a>
               <a class="btn btn-danger" href="{{route('delete.role',$role->id)}}">Delete</a>
-            </td>
+            </td> -->
 
         </tr>
           @endforeach

@@ -24,7 +24,13 @@ class ContactController extends Controller
 
     public function index()
     {
+        if(auth()->user()->hasRole('super admin')){
        $cont=Contact::all();
+        }
+        else{
+        
+        $cont=auth()->user()->contacts()->get();
+       }
        return view('admin.contact.all_contact',compact('cont'));
     }
 
@@ -35,7 +41,13 @@ class ContactController extends Controller
      */
     public function create()
     {
-        $us=User::all();
+        if(auth()->user()->hasRole('super admin')){
+            $us=User::all();
+        }
+      
+        else{
+           $us=auth()->user()->members()->get();
+        }
         return view('admin.contact.add_contact',compact('us'));
     }
 
@@ -101,7 +113,17 @@ class ContactController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $contact=Contact::find($id);
+        $contact->user_id=$request->user_id;
+        $contact->name=$request->name;
+        $contact->email=$request->email;
+        $contact->phone_no=$request->phone_no;
+        $contact->contry=$request->contry;
+        $contact->city=$request->city;
+        $contact->address=$request->address;
+
+        $contact->save();
+        return redirect()->route('all.contact');
     }
 
     /**

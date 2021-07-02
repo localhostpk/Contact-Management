@@ -28,19 +28,21 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-
-              <h1>{{$role->name}}</h1>
-           <div class="">
+           <div class="box box-primary">
             
             <!-- /.box-header -->
             <!-- form start -->
-          
+             <h1>{{$role->name}}</h1>
+            <form role="form"action="{{route('assign.permission')}}" method="post">
+              @csrf
+              <div class="box-body">
+            <input type="hidden" name="role_id" value="{{$role->id}}">
                    <section class="content">
       <div class="row">
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">All Permissions</h3>
+              <h3 class="box-title">Assign Permission to Role</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -55,12 +57,12 @@
                 </thead>
                 <tbody>
             
-            @foreach($permissions as $single_permis)
+             @foreach($permissions as $single_permis)
 
              
               <tr> 
                 <td>
-                  <input type="checkbox" name="permission_id[]" 
+                  <input type="checkbox" name="permission_id[]"  value="{{$single_permis->id}}" 
                   @foreach($roleHasPermissions as $selectedPermission)
                     @if($single_permis->id == $selectedPermission->permission_id) checked @endif
                   @endforeach>
@@ -69,8 +71,6 @@
                 <td>{{$single_permis->name}}</td> 
               </tr>
               @endforeach
-           
-
                 </tbody>
                 <tfoot>
                 <tr>
@@ -90,7 +90,14 @@
       </div>
       <!-- /.row -->
     </section>
-              
+              </div>
+              <!-- /.box-body -->
+
+              <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </form>
+          </div>
             </div>
             <!-- /.box-body -->
           </div>

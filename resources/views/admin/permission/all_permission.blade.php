@@ -31,7 +31,7 @@
                 <tr>
                    <th> Permission ID </th>
               <th> Permission Name</th>
-              <th>Actions</th>
+            <!--   <th>Actions</th> -->
                 </tr>
                 </thead>
                 <tbody>
@@ -40,9 +40,9 @@
         <tr> 
           <td class="table-success">{{$permission->id}}</td>
           <td>{{$permission->name}}</td>
-          <td><a class="btn btn-primary" href="{{route('edit.permission',$permission->id)}}">Edit</a>
+          <!-- <td><a class="btn btn-primary" href="{{route('edit.permission',$permission->id)}}">Edit</a>
               <a class="btn btn-danger" href="{{route('delete.permission',$permission->id)}}">Delete</a>
-            </td>
+            </td> -->
         </tr>
           @endforeach
                 </tbody>
@@ -50,7 +50,7 @@
                 <tr>
                  <th> Permission ID </th>
               <th> Permission Name</th>
-              <th>Actions</th>
+             <!--  <th>Actions</th> -->
                 </tr>
                 </tfoot>
               </table>

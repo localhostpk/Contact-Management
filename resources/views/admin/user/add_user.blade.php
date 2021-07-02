@@ -39,6 +39,20 @@
               @csrf
               <div class="box-body">
                  <div class="form-group">
+                <label>Add User With City Admin Reference</label>
+                <select class="form-control select2" style="width: 100%;"name="user_id">
+                  <option hidden="hidden" disabled="disabled" selected=""></option>
+                      @foreach($users as $user)
+                  <option  value="{{$user->id}}" @if(old("user_id")==$user->id)
+                    selected="selected"
+                    @endif
+                    >
+                   {{$user->name}}
+                  </option>
+                 @endforeach
+                </select>
+              </div>
+                 <div class="form-group">
                 <label>Select Role</label>
                 <select class="form-control select2" style="width: 100%;"name="role_id">
                       @foreach($r as $role)

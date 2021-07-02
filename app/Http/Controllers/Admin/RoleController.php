@@ -66,6 +66,7 @@ class RoleController extends Controller
       $permissions = Permission::all();
       $roleHasPermissions = DB::table('role_has_permissions')
                             ->select(['*'])->where('role_id',$id)->get();
+
       return view('admin.role.role_to_permission',compact('role', 'permissions', 'roleHasPermissions'));
     }
 
