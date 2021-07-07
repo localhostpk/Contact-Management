@@ -30,6 +30,7 @@
             @if($errors->any())
           {!! implode('', $errors->all('<div class="alert alert-danger">:message</div>')) !!}
           @endif
+     
             <!-- /.box-header -->
             <!-- form start -->
             <form role="form"action="{{route('create.role')}}" method="post">
@@ -58,8 +59,10 @@
       </div>
       <!-- /.row -->
     </section>
+
     <!-- /.content -->
   </div>
+  
   @endsection
   @push('js')
   <script src="{{asset('web/bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
@@ -70,4 +73,5 @@
    
   })
 </script>
+@include('sweetalert::alert')
 @endpush

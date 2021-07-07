@@ -20,7 +20,6 @@
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="{{asset('web/dist/css/skins/_all-skins.min.css')}}">
  
-
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -97,16 +96,16 @@
               </li>
             </ul>
           </li>
-          <!-- User Account: style can be found in dropdown.less -->
+          <!-- User Account:  style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="{{asset('web/dist/img/user2-160x160.jpg')}}" class="user-image" alt="User Image">
+              <img src="{{'storage/upload/'.auth()->user()->profile_pic}}" class="user-image" alt="User Image">
               <span class="hidden-xs">{{Auth::user()->name}}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="{{asset('web/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
+                <img src="{{'storage/upload/'.auth()->user()->profile_pic}}" class="img-circle" alt="User Image">
 
                 <p>
                 <small>Name:   {{Auth::user()->name}}</small>
@@ -117,9 +116,12 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  <a href="{{'profile'}}" class="btn btn-default btn-flat">Profile</a>
                 </div>
-                <div class="pull-right">
+                 <div class="pull-left">
+                 <a href="" class="btn btn-default btn-flat">Pass update</a>
+               </div>
+                <div class="pull-left">
                   <a href="{{'logout'}}" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
@@ -138,13 +140,14 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="{{asset('web/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
+          <img src="{{'storage/upload/'.auth()->user()->profile_pic}}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>{{Auth::user()->name}}</p>
+          <p> Admin Name:  {{Auth::user()->name}}</p>
           <small>{{Auth::user()->getRoleNames()->first()}}</small>
         </div>
       </div>
+
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
        
@@ -208,6 +211,7 @@
             @can('view user')
             <li class="{{request()->Is('all-user*') ? 'active':''}}"><a href="{{route('all.user')}}"><i class="fa fa-circle-o"></i> All Users</a></li>
            @endcan
+           <li><a href="{{route('user.tree.view')}}"><i class="fa fa-circle-o"></i>User Tree View</a></li>
           </ul>
         </li>
 @endcan
@@ -226,12 +230,15 @@
             @can('view contact')
             <li><a href="{{route('all.contact')}}"><i class="fa fa-circle-o"></i> All Contact</a></li>
             @endcan
+           
+            <li><a href="{{route('contact.tree.view')}}"><i class="fa fa-circle-o"></i>Contact Tree View</a></li>
+            
             
           </ul>
         </li>
 @endcan
 @can('view qr')
-   <li class="treeview {{request()->Is('create-qr*')  || request()->Is('view-qr*') ? 'active menu-open':''}}">
+   <li class="treeview {{request()->Is('generate.qr_code*')  || request()->Is('all.qr_codes*') ? 'active menu-open':''}}">
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>QR Codes</span>
             <span class="pull-right-container">
@@ -240,15 +247,32 @@
           </a>
           <ul class="treeview-menu">
             @can('create qr')
-            <li class="active"><a href="//"><i class="fa fa-circle-o"></i>Genrate QR Codes</a></li>
+            <li class="active"><a href="{{route('generate.qr_code')}}"><i class="fa fa-circle-o"></i>Genrate QR Codes</a></li>
             @endcan
             @can('view qr')
-            <li><a href="//"><i class="fa fa-circle-o"></i>All QR Codes</a></li>
+            <li><a href="{{route('all.qr_codes')}}"><i class="fa fa-circle-o"></i>All QR Codes</a></li>
            @endcan
             
           </ul>
         </li>
 @endcan
+   <li class="treeview {{request()->Is('generate.qr_code*')  || request()->Is('all.qr_codes*') ? 'active menu-open':''}}">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Dasboard Setting</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+          
+            <li class="active"><a href="//"><i class="fa fa-circle-o"></i>text1</a></li>
+           
+            <li><a href="//"><i class="fa fa-circle-o"></i>Text2</a></li>
+           
+            
+          </ul>
+        </li>
+
       </ul>
     </section>
     <!-- /.sidebar -->
@@ -275,10 +299,12 @@
 <!-- Bootstrap 3.3.7 -->
 <script src="{{asset('web/bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
 <!-- FastClick -->
+
 <script src="{{asset('web/bower_components/fastclick/lib/fastclick.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('web/dist/js/adminlte.min.js')}}"></script>
 <!-- Sparkline -->
+
 <script src="{{asset('web/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js')}}"></script>
 <!-- jvectormap  -->
 <script src="{{asset('web/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js')}}"></script>
@@ -287,9 +313,13 @@
 <script src="{{asset('web/bower_components/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
 <!-- ChartJS -->
 <script src="{{asset('web/bower_components/chart.js/Chart.js')}}"></script>
+
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <!-- AdminLTE for demo purposes -->
+
+
 @stack('js')
+
 </body>
 </html>
 

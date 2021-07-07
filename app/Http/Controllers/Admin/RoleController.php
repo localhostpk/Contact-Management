@@ -8,6 +8,10 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use App\Models\User;
 use DB;
+use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Validator;
+
+
 
 class RoleController extends Controller
 {
@@ -24,15 +28,20 @@ class RoleController extends Controller
     public function createrole()
     {
         $permission=Permission::all();
+        // Alert::alert('Well-Come', 'Role Added Form', 'info');
+        //Alert::toast('Toast Message', 'Toast Type');
         return view('admin.role.create',compact('permission'));
+    
     }
     public function storerole(Request $request)
     {
-        $request->validate([
-        'name' => 'required|unique:roles',
+    
+         $request->validate([
+         'name' => 'required|unique:roles',
          ]);
         $role = Role::create(['name' => $request->name]);
         $role->permissions()->sync($request->permission_id);
+         Alert::success('Successfully', 'Role Added');
         return back();
     }
     public function assignroleform()
@@ -46,10 +55,12 @@ class RoleController extends Controller
         $user=User::find($request->user_id);
         $role=Role::find($request->role_id);
         $user->assignRole($role);
+        Alert::success('Successfully', 'Role Assign');
         return back();
     }
     public function allrole()
     {
+    
         $roles=Role::all();
         return view('admin.role.all_role',compact('roles'));
     }
@@ -66,7 +77,7 @@ class RoleController extends Controller
       $permissions = Permission::all();
       $roleHasPermissions = DB::table('role_has_permissions')
                             ->select(['*'])->where('role_id',$id)->get();
-
+        Alert::success('Successfully', 'Assign Permission to Role');
       return view('admin.role.role_to_permission',compact('role', 'permissions', 'roleHasPermissions'));
     }
 
@@ -75,6 +86,7 @@ class RoleController extends Controller
         $role=Role::find($id);
         $role->name=$request->name;
         $role->save();
+        Alert::info('Successfully', 'Role updated');
         return redirect()->route('all.role');
     }
 
@@ -82,6 +94,7 @@ class RoleController extends Controller
     {
         $role=Role::find($id);
         $role->delete();
+        Alert::warning('Delete Role', 'Role deleted');
         return redirect()->route('all.role');
     }
 }

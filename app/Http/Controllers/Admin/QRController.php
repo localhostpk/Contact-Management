@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\User;
+use App\Models\QrCode;
+use RealRashid\SweetAlert\Facades\Alert;
 class QRController extends Controller
 {
     public function __construct()
@@ -20,19 +22,30 @@ class QRController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+       $qr=QrCode::all();
+       $user=User::find($request->user_id);
+       return view('admin.qr.all_qr_codes',compact('qr','user'));
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Responses
      */
     public function create()
     {
-      //
+      
+          if(auth()->user()->hasRole('super admin')){
+       $users=User::all();
+        }
+        else{
+        
+        $users=auth()->user()->members()->get();
+       }
+    
+        return view('admin.qr.genrate_qr_codes',compact('users'));
     }
 
     /**
@@ -43,7 +56,18 @@ class QRController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+        'timelimit' => 'required',
+        'user_id' => 'required',
+         ]);
+        $user=User::find($request->user_id);
+         if($user->qrcode){
+            $user->qrcode->delete();
+        }
+        $user->qrcode()->create(['timelimit'=>$request->timelimit]);
+            Alert::success('Successfully', 'QrCode Genrate');
+        return back();
+
     }
 
     /**

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use App\Models\User;
-
+use RealRashid\SweetAlert\Facades\Alert;
 class PermissionController extends Controller
 {
     public function __construct()
@@ -32,6 +32,7 @@ class PermissionController extends Controller
         'name' => 'required',
          ]);
        $permission = Permission::create(['name' => $request->name]);
+        Alert::success('Successfully', 'Permission Added');
        return back();
     }
     public function assignpermissionform()
@@ -47,6 +48,7 @@ class PermissionController extends Controller
         //return $request->permission_id;
         $roles=Role::find($request->role_id);
         $roles->syncPermissions($request->permission_id);
+         Alert::success('Successfully', 'Permission Assign');
         return back();
     }
     public function allpermission()
@@ -66,6 +68,7 @@ class PermissionController extends Controller
         $permission=Permission::find($id);
         $permission->name=$request->name;
         $permission->save();
+         Alert::info('Successfully', 'Permission Update');
         return redirect()->route('all.permission');
     }
 
@@ -73,6 +76,7 @@ class PermissionController extends Controller
     {
         $permission=Permission::find($id);
         $permission->delete();
+         Alert::warning('Permission delete', 'Permission Deleted');
         return redirect()->route('all.permission');
     }
 }

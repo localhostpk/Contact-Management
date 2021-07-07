@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use DB;
 use App\Models\User;
-
-
-
-class AdminController extends Controller
+use Storage;
+use RealRashid\SweetAlert\Facades\Alert;
+class ProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +16,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.index');
+        //
     }
 
     /**
@@ -27,7 +26,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        //
+         return view('admin.profile');
     }
 
     /**
@@ -38,7 +37,27 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+       $request->validate([
+            'image' => 'required|mimes:jpg,png,psd|max:2048',
+       ]);
+
+        $user=auth()->user();
+        if($request->hasFile('image'))
+        {
+       
+              Storage::delete('public/upload/'.$user->profile_pic);
+      
+        $imagename=$request->image->getClientOriginalName();
+        $request->image->storeAs('public/upload/',$imagename);
+        $user->profile_pic=$imagename;
+        }
+       $user->name=$request->name;
+       $user->email=$request->email;
+       $user->save();
+           Alert::success('Successfully', 'Profile Update');
+       return back();
+
     }
 
     /**
@@ -85,27 +104,4 @@ class AdminController extends Controller
     {
         //
     }
-    public function dashboard()
-    {
-        
-        if(auth()->user()->hasRole('super admin'))
-        {
-
-            $contacts=DB::table('contacts')->select('id')->count('id');
-            $users=DB::table('users')->select('id')->count('id');
-            $permissions=DB::table('permissions')->select('id')->count('id');
-            $roles=DB::table('roles')->select('id')->count('id');
-        }
-        else
-        { 
-            $contacts=auth()->user()->contacts()->count();
-            $users=auth()->user()->members()->count();
-            $permissions=auth()->user()->permissions()->count();
-            $roles=auth()->user()->roles()->count();
-        
-        }
-
-        return view('dashboard',compact('contacts','users','permissions','roles'));
-    }
 }
-

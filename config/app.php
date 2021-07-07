@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Karachi',
 
     /*
     |--------------------------------------------------------------------------
@@ -167,6 +167,9 @@ return [
          */
        
        SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
+       UxWeb\SweetAlert\SweetAlertServiceProvider::class,
+       
+
         /*
          * Application Service Providers...
          */
@@ -229,6 +232,9 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
          'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
+         'Alert' => UxWeb\SweetAlert\SweetAlert::class,
+       
+
 
 
     ],

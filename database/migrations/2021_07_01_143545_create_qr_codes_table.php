@@ -18,6 +18,7 @@ class CreateQrCodesTable extends Migration
             $table->uuid('qr_code_string')->nullable();
             $table->string('qr_code_image')->nullable();
             $table->foreignId('user_id')->nullable();
+            $table->string('timelimit')->nullable();
             $table->timestamps();
         });
     }

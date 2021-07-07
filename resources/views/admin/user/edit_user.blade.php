@@ -51,7 +51,7 @@
                <label>Select Role</label>
                 <select class="form-control select2" style="width: 100%;"name="role_id">
                    @foreach($r as $role)
-                  <option value="{{$role->id}}"  @if($user->roles->first()->sid==$role->id)
+                  <option value="{{$role->id}}"  @if(optional($user->roles->first())->sid==$role->id)
                     selected="selected"
                     @endif>
                     {{$role->name}}
@@ -170,4 +170,5 @@
     })
   })
 </script>
+@include('sweetalert::alert')
 @endpush

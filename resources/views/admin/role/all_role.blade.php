@@ -9,6 +9,7 @@
    <section class="content-header">
       <h1>
         All Roles
+
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{'/dashboard'}}"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -79,6 +80,7 @@
     </section>
     <!-- /.content -->
   </div>
+
   @endsection
   @push('js')
   <script src="{{asset('web/bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
@@ -89,4 +91,5 @@
    
   })
 </script>
+@include('sweetalert::alert')
 @endpush

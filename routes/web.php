@@ -8,7 +8,10 @@ use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\UserContactController;
 use App\Http\Controllers\Admin\QRController;
+use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+
+
 
 
 
@@ -69,8 +72,16 @@ Route::get('edit-user/{id}',[UserController::class,'edit'])->name('edit.user');
 Route::post('edit-user/{id}',[UserController::class,'update'])->name('update.user');
 Route::get('delete-user/{id}',[UserController::class,'destroy'])->name('destroy.user');
 
-//QR CODE
+//QR CODE Link  Genrate
 Route::get('generate-link-qrcode/{id}',[UserController::class,'generate'])->name('generate.qr_code.user');
+// edit CODE Link
+Route::post('edit-link-qrcode/{id}',[UserController::class,'edit_qr_link'])->name('edit.qr_code.user');
+Route::get('edit-link-qrcode/{id}',[UserController::class,'view_edit_qr_link'])->name('edit.qr_code.user');
+
+
+Route::get('generate_qr_code',[QRController::class,'create'])->name('generate.qr_code');
+Route::post('generate_qr_code',[QRController::class,'store'])->name('generate.qr_code');
+Route::get('all_qr_codes',[QRController::class,'index'])->name('all.qr_codes');
 
 //Contact
 Route::get('add-contact',[ContactController::class,'create'])->name('add.contact');
@@ -87,11 +98,23 @@ Route::get('add-usercontact/{token}',[UserContactController::class,'create'])->n
 Route::post('add-usercontact/{token}',[UserContactController::class,'store'])->name('add.usercontact');
 
 
-//QR Code Genrate
+//QR Code view
 Route::get('qrcode/{token}' ,[UserContactController::class,'viewQR'])->name('qr_code.view');
 
-//QR Codes
 
-/*Route::get('create-qr',[QRController::class,'create'])->name('create.qr');
-Route::post('create-qr',[QRController::class,'store'])->name('create.qr');
-Route::get('all-qr',[QRController::class,'index'])->name('all.qr');*/
+//Admin Profile sitting
+Route::get('profile',[ProfileController::class,'create'])->name('profile.create');
+Route::post('profile',[ProfileController::class,'store'])->name('profile.create');
+
+
+
+Route::get('contact_add', function () {
+    return view('contact_add');
+});
+
+
+//USer Tree View 
+Route::get('user-tree-view',[UserController::class,'user_tree_view'])->name('user.tree.view');
+
+//Contact Tree View 
+Route::get('contact-tree-view',[ContactController::class,'contact_tree_view'])->name('contact.tree.view');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Contact;
 use App\Models\QrCode;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserContactController extends Controller
 {
@@ -17,6 +18,10 @@ class UserContactController extends Controller
         $qrcode=QrCode::where('qr_code_string',$token)
         ->wherehas('user')
         ->firstorfail();
+        $hours=$qrcode->created_at->diffInHours(now());
+        if($hours > $qrcode->timelimit){
+            throw new \Illuminate\Database\Eloquent\ModelNotFoundException;
+        }
         return view('add_contact',compact('qrcode'));
     }
     public function store(Request $request,$token)
@@ -43,6 +48,7 @@ class UserContactController extends Controller
         $cont->address=$request->address;
 
         $cont->save();
+        Alert::success('Successfully', 'Contact Added');
         return back();
 
     }

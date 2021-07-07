@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Contact;
+use RealRashid\SweetAlert\Facades\Alert;
 class ContactController extends Controller
 {
     /**
@@ -77,6 +78,7 @@ class ContactController extends Controller
         $cont->address=$request->address;
 
         $cont->save();
+          Alert::success('Successfully', 'Contact Added');
         return redirect()->route('all.contact');
     }
 
@@ -123,6 +125,7 @@ class ContactController extends Controller
         $contact->address=$request->address;
 
         $contact->save();
+          Alert::success('Successfully', 'Contact Update');
         return redirect()->route('all.contact');
     }
 
@@ -136,6 +139,23 @@ class ContactController extends Controller
     {
         $contact=Contact::find($id);
         $contact->delete();
+          Alert::warning('Deleted', 'Contact Deleted');
         return redirect()->route('all.contact');
+    }
+    public function contact_tree_view()
+    {
+      if(auth()->user()->hasRole('super admin')){
+        
+        $users=User::wherehas('roles',function($q){
+            $q->where('name','city admin');
+        })->with(['members','members.contacts'])->get();
+
+        }
+      
+        else{
+           $users=auth()->user()->members()->with(['members','members.contacts'])->get();
+        }
+       
+        return view('admin.contact.tree_view',compact('users'));
     }
 }

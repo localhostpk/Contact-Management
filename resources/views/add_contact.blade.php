@@ -1,87 +1,113 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
-  <title> Contact Add</title>
-</head>
-<body>
-<div class="container">
-  <form action="{{route('add.usercontact',$qrcode->qr_code_string)}}" method="post">
-    @csrf
-    <h2>Contact Us</h2>
-    <div class="row">
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="first">Name</label>
-          <input type="text" class="form-control" placeholder="Enter your Name" name="name" id="first">
+  <head>
+    <title>Madani Contact Form</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <style>
+      html, body {
+      min-height: 100%;
+      padding: 0;
+      margin: 0;
+      font-family: Roboto, Arial, sans-serif;
+      font-size: 14px;
+      color: #666;
+      }
+      h1 {
+      margin: 0 0 20px;
+      font-weight: 400;
+      color: #1c87c9;
+      text-align: center;
+      }
+      .main-block {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: white;
+      }
+      form {
+      padding: 25px;
+      margin: 25px;
+      border: solid black;
+      background: white; 
+      }
+      .fas {
+      margin: 25px 10px 0;
+      font-size: 72px;
+      color: #fff;
+      }
+      .fa-envelope {
+      transform: rotate(-20deg);
+      }
+      .fa-at , .fa-mail-bulk{
+      transform: rotate(10deg);
+      }
+      input, textarea {
+      width: calc(100% - 18px);
+      padding: 8px;
+      margin-bottom: 20px;
+      border: 1px solid #1c87c9;
+      outline: none;
+      }
+      input::placeholder {
+      color: #666;
+      }
+      button {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      background: #1c87c9; 
+      font-size: 16px;
+      font-weight: 400;
+      color: #fff;
+      }
+      button:hover {
+      background: #2371a0;
+      }    
+      @media (min-width: 568px) {
+      .main-block {
+      flex-direction: row;
+      }
+      
+      .fa-envelope {
+      margin-top: 0;
+      margin-left: 20%;
+      }
+      .fa-at {
+      margin-top: -10%;
+      margin-left: 65%;
+      }
+      .fa-mail-bulk {
+      margin-top: 2%;
+      margin-left: 28%;
+      }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-block">
+      <form class="form-control" action="{{route('add.usercontact',$qrcode->qr_code_string)}}" method="post" enctype="multipart-data">
+        @csrf
+        <h1>Madani Contact Form</h1>
+        <div class="info">
+          <label>Name:</label>
+          <input class="fname" type="text" name="name" placeholder="Please Enter Name:">
+          <label>Email Address:</label>
+          <input type="email"  name="email" placeholder="Please Enter Email:">
+          <label>Phone No:</label>
+          <input type="text" name="phone_no" placeholder="Please Enter Phone number:">
+          <label>Country:</label>
+          <input type="text"  name="contry" placeholder="Please Enter Country:">
+          <label>City:</label>
+          <input type="text"  name="city" placeholder="Please Enter City:">
+          <label>Address:</label>
+          <input type="text"  name="address" placeholder="Please Enter Address:">
         </div>
-      </div>
-      @if($errors->has('name'))
-        <div class="text-danger">{{ $errors->first('name') }}</div>
-      @endif
-      <!--  col-md-6   -->
-
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="last">Email Address</label>
-          <input type="email" class="form-control"name="email" placeholder="Enter Email" id="last">
-        </div>
-      </div>
-      <!--  col-md-6   -->
-      @if($errors->has('email'))
-        <div class="text-danger">{{ $errors->first('email') }}</div>
-      @endif
+        <button type="submit">Submit</button>
+      </form>
     </div>
-
-
-    <div class="row">
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="first">Phone Number</label>
-          <input type="text" class="form-control" name="phone_no" placeholder="Enter your phone number" id="first">
-        </div>
-      </div>
-      @if($errors->has('phone_no'))
-        <div class="text-danger">{{ $errors->first('phone_no') }}</div>
-      @endif
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="company">Country</label>
-          <input type="text" class="form-control" name="contry" placeholder="Enter your Country" id="company">
-        </div>
-      </div>
-      @if($errors->has('contry'))
-        <div class="text-danger">{{ $errors->first('contry') }}</div>
-      @endif
-      <!--  col-md-6   -->
-    </div>
-<div class="row">
-
-        <div class="col-md-6">
-        <div class="form-group">
-          <label for="phone">City</label>
-          <input type="text" class="form-control" name="city" id="phone" placeholder="Enter your City">
-        </div>
-      </div>
-      @if($errors->has('city'))
-        <div class="text-danger">{{ $errors->first('city') }}</div>
-      @endif
-      <!--  col-md-6   -->
-       <div class="col-md-6">
-        <div class="form-group">
-          <label for="email">Address</label>
-          <input type="text" class="form-control"name="address" id="email" placeholder="Enter your Address">
-        </div>
-      </div>
-      @if($errors->has('address'))
-        <div class="text-danger">{{ $errors->first('address') }}</div>
-      @endif
-    </div>
-    <!--  row   -->
-    <br>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
-</div>
-</body>
+    @include('sweetalert::alert')
+  </body>
 </html>

@@ -14,6 +14,7 @@ class QrCode extends Model
         'qr_code_string',
         'qr_code_image',
         'user_id',
+        'timelimit',
     
     ];
 
