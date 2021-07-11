@@ -12,6 +12,20 @@ use Illuminate\Support\Facades\Artisan;
 
 class SettingController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('role_or_permission:super admin|view project details',['only'=>'all_project_details']);
+        $this->middleware('role_or_permission:super admin|add project details',['only'=>'project_details','add_project_details']);
+        $this->middleware('role_or_permission:super admin|update project details',['only'=>'edit_project_details','update_project_details']);
+        $this->middleware('role_or_permission:super admin|delete project details',['only'=>'project_details_destroy']);
+
+        $this->middleware('role_or_permission:super admin|view smtp',['only'=>'all_smtp_details']);
+        $this->middleware('role_or_permission:super admin|add smtp ',['only'=>'project_smtp','add_project_details']);
+        $this->middleware('role_or_permission:super admin|update smtp ',['only'=>'edit_smtp_details','update_project_details']);
+        $this->middleware('role_or_permission:super admin|delete smtp ',['only'=>'project_smtp_destroy']);
+        $this->middleware('role_or_permission:super admin|website maintenance ',['only'=>'maintenance','storemaintenance']);
+    }
     public function project_details()
     {
         return view('admin.setting.pro_setting');

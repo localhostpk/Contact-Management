@@ -256,7 +256,8 @@
           </ul>
         </li>
 @endcan
-   <li class="treeview {{request()->Is('generate.qr_code*')  || request()->Is('all.qr_codes*') ? 'active menu-open':''}}">
+@can('view project details')
+   <li class="treeview {{request()->Is('add.project.details*')  || request()->Is('all.project.details*') || request()->Is('add.smtp.details*') || request()->Is('all.smtp.details*') || request()->Is('maintenance*') ? 'active menu-open':''}}">
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>Dasboard Setting</span>
             <span class="pull-right-container">
@@ -264,11 +265,21 @@
             </span>
           </a>
           <ul class="treeview-menu">
+            @can('add project details')
            <li><a href="{{route('add.project.details')}}"><i class="fa fa-circle-o"></i>Project Details</a></li>
+           @endcan
+           @can('view project details')
            <li><a href="{{route('all.project.details')}}"><i class="fa fa-circle-o"></i>All Project Details</a></li>
+           @endcan
+           @can('add smtp')
            <li><a href="{{route('add.smtp.details')}}"><i class="fa fa-circle-o"></i>SMTP Details</a></li>
+           @endcan
+           @can('view smtp')
            <li><a href="{{route('all.smtp.details')}}"><i class="fa fa-circle-o"></i>All SMTP Details</a></li>
+           @endcan
+           @can('website maintenance')
             <li class="active"><a href="{{route('maintenance')}}"><i class="fa fa-circle-o"></i>Maintenance mode</a></li>
+            @endcan
             <li><a href="//"><i class="fa fa-circle-o"></i>SMS APi</a></li>
             <li><a href="//"><i class="fa fa-circle-o"></i>Feature Enable & Des</a></li>
              <li><a href="//"><i class="fa fa-circle-o"></i>System backup</a></li>
@@ -277,7 +288,7 @@
             
           </ul>
         </li>
-
+@endcan
       </ul>
     </section>
     <!-- /.sidebar -->

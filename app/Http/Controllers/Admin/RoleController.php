@@ -42,6 +42,8 @@ class RoleController extends Controller
         $role = Role::create(['name' => $request->name]);
         $role->permissions()->sync($request->permission_id);
          Alert::success('Successfully', 'Role Added');
+       // Alert::toast('Successfully', 'Role Added');
+
         return back();
     }
     public function assignroleform()
