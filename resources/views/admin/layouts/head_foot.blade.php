@@ -264,11 +264,16 @@
             </span>
           </a>
           <ul class="treeview-menu">
-          
-            <li class="active"><a href="//"><i class="fa fa-circle-o"></i>text1</a></li>
-           
-            <li><a href="//"><i class="fa fa-circle-o"></i>Text2</a></li>
-           
+           <li><a href="{{route('add.project.details')}}"><i class="fa fa-circle-o"></i>Project Details</a></li>
+           <li><a href="{{route('all.project.details')}}"><i class="fa fa-circle-o"></i>All Project Details</a></li>
+           <li><a href="{{route('add.smtp.details')}}"><i class="fa fa-circle-o"></i>SMTP Details</a></li>
+           <li><a href="{{route('all.smtp.details')}}"><i class="fa fa-circle-o"></i>All SMTP Details</a></li>
+            <li class="active"><a href="{{route('maintenance')}}"><i class="fa fa-circle-o"></i>Maintenance mode</a></li>
+            <li><a href="//"><i class="fa fa-circle-o"></i>SMS APi</a></li>
+            <li><a href="//"><i class="fa fa-circle-o"></i>Feature Enable & Des</a></li>
+             <li><a href="//"><i class="fa fa-circle-o"></i>System backup</a></li>
+              <li><a href="//"><i class="fa fa-circle-o"></i>Restore</a></li>
+
             
           </ul>
         </li>

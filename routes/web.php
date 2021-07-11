@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\UserContactController;
 use App\Http\Controllers\Admin\QRController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 
@@ -118,3 +119,25 @@ Route::get('user-tree-view',[UserController::class,'user_tree_view'])->name('use
 
 //Contact Tree View 
 Route::get('contact-tree-view',[ContactController::class,'contact_tree_view'])->name('contact.tree.view');
+
+//Admin Dashboard Settings
+
+//profile details
+Route::get('project-setting',[SettingController::class,'project_details'])->name('add.project.details');
+Route::post('project-setting',[SettingController::class,'add_project_details'])->name('add.project.details');
+Route::get('all-project-setting',[SettingController::class,'all_project_details'])->name('all.project.details');
+Route::get('edit-project-setting/{id}',[SettingController::class,'edit_project_details'])->name('edit.project.details');
+Route::post('edit-project-setting/{id}',[SettingController::class,'update_project_details'])->name('update.project.details');
+Route::get('delete-project-setting/{id}',[SettingController::class,'project_details_destroy'])->name('delete.project.details');
+
+//Smtp in dashboard
+Route::get('add_smtp_details',[SettingController::class,'smtp_details'])->name('add.smtp.details');
+Route::post('add_smtp_details',[SettingController::class,'store_smtp_details'])->name('add.smtp.details');
+Route::get('all-smtp-details',[SettingController::class,'all_smtp_details'])->name('all.smtp.details');
+Route::get('edit-smtp-details/{id}',[SettingController::class,'edit_smtp_details'])->name('edit.smtp.details');
+Route::post('edit-smtp-details/{id}',[SettingController::class,'update_smtp_details'])->name('update.smtp.details');
+Route::get('delete-smtp-details/{id}',[SettingController::class,'project_smtp_destroy'])->name('delete.smtp.details');
+
+//Maintencance
+Route::get('maintenance',[SettingController::class,'maintenance'])->name('maintenance');
+Route::post('maintenance',[SettingController::class,'storemaintenance'])->name('maintenance');
